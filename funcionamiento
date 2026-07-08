@@ -1,0 +1,5 @@
+control de bodega en estado de creacion v1.0 
+se creo para el control del inventario de electromecanicos
+ese programa permite ingresar articulos y eliminarlos dependiendo
+del articulo sacado de bodega y deja un resultado final de cuanto queda 
+de inventario en bodega una vez ya actualizado
