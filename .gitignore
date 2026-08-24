@@ -1,0 +1,22 @@
+# Archivos de caché y compilación de Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Entornos virtuales
+venv/
+env/
+ENV/
+.env
+
+# Archivos de configuración de editores / IDEs
+.vscode/
+.idea/
+
+# Reportes y archivos generados en tiempo de ejecución
+*.csv
+*.xlsx
+
+# Archivos temporales del sistema operativo
+.DS_Store
+Thumbs.db
