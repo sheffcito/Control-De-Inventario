@@ -1,0 +1,98 @@
+# Sistema de Control de Inventario
+
+inventario = [
+    {"producto": "pinzas", "stock": 5},
+    {"producto": "teflon", "stock": 0},
+    {"producto": "herramienta sellado", "stock": 8},
+]
+
+def mostrar_inventario():
+    print("\n" + "=" * 40)
+    print("           ESTADO DEL INVENTARIO")
+    print("=" * 40)
+    if not inventario:
+        print("El inventario está vacío.")
+        return
+    for item in inventario:
+        estado = "⚠️ AGOTADO" if item["stock"] == 0 else f"{item['stock']} unidades"
+        print(f"• {item['producto'].capitalize():<25} | Stock: {estado}")
+    print("=" * 40)
+
+def buscar_producto(nombre):
+    for item in inventario:
+        if item["producto"].lower() == nombre.strip().lower():
+            return item
+    return None
+
+def agregar_o_actualizar_producto():
+    nombre = input("\nIngrese el nombre del producto: ").strip()
+    if not nombre:
+        print(" El nombre no puede estar vacío.")
+        return
+    
+    try:
+        cantidad = int(input("Ingrese la cantidad a ingresar: "))
+        if cantidad < 0:
+            print(" La cantidad no puede ser negativa.")
+            return
+    except ValueError:
+        print(" Error: Ingrese un número entero válido.")
+        return
+
+    item = buscar_producto(nombre)
+    if item:
+        item["stock"] += cantidad
+        print(f" Stock actualizado. '{item['producto']}' ahora tiene {item['stock']} unidades.")
+    else:
+        inventario.append({"producto": nombre, "stock": cantidad})
+        print(f" Producto '{nombre}' agregado exitosamente con {cantidad} unidades.")
+
+def retirar_producto():
+    nombre = input("\nIngrese el producto a retirar: ").strip()
+    item = buscar_producto(nombre)
+    
+    if not item:
+        print(f"🔍 Error: El producto '{nombre}' no existe en el inventario.")
+        return
+
+    try:
+        cantidad = int(input(f"Stock disponible ({item['stock']}). Cantidad a retirar: "))
+        if cantidad <= 0:
+            print(" La cantidad debe ser mayor a 0.")
+            return
+    except ValueError:
+        print(" Error: Ingrese un número válido.")
+        return
+
+    if item["stock"] >= cantidad:
+        item["stock"] -= cantidad
+        print(f" Se retiraron {cantidad} unidades de '{item['producto']}'.")
+        print(f"Stock restante: {item['stock']} unidades.")
+    else:
+        print(f" Stock insuficiente. Solicitaste {cantidad}, pero solo quedan {item['stock']}.")
+
+def menu_principal():
+    while True:
+        print("\n--- CONTROL DE INVENTARIO ---")
+        print("1. Ver inventario")
+        print("2. Agregar o reponer producto")
+        print("3. Retirar producto (salida de stock)")
+        print("4. Salir")
+        
+        opcion = input("Seleccione una opción (1-4): ").strip()
+        
+        if opcion == "1":
+            mostrar_inventario()
+        elif opcion == "2":
+            agregar_o_actualizar_producto()
+        elif opcion == "3":
+            retirar_producto()
+        elif opcion == "4":
+            print("\n Saliendo del sistema. ¡Hasta luego!")
+            break
+        else:
+            print(" Opción inválida. Ingrese un número del 1 al 4.")
+
+# Iniciar programa
+if __name__ == "__main__":
+    menu_principal()
