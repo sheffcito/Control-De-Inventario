@@ -17,4 +17,4 @@ Aplicación en Python orientada a objetos para la gestión de productos, entrada
    ```bash
    git clone [https://github.com/TU-USUARIO/inventario-python.git](https://github.com/sheffcito/inventario-python.git)
    cd inventario-python
-2. instalar dependencias.txt
+2. instalar requirements.txt
